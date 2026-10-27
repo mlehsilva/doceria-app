@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "nome": "Brigadeiro Gourmet Tradicional",
+    "descricao": "Feito com chocolate belga 54% cacau e granulado nobre split.",
+    "preco": 4.50,
+    "imagem": "public/produtos/brigadeiroT.jpg"
+  },
+  {
+    "id": 2,
+    "nome": "Bolo de Pote Ninho com Nutella",
+    "descricao": "Camadas cremosas de leite Ninho intercaladas com Nutella pura.",
+    "preco": 12.00,
+    "imagem": "public/produtos/bolodepoteNN.jpg"
+  },
+  {
+    "id": 3,
+    "nome": "Coxinha de Morango",
+    "descricao": "Morango fresco inteiro envolto em uma camada generosa de brigadeiro.",
+    "preco": 8.50,
+    "imagem": "public/produtos/coxinhaMo.jpg"
+  },
+  {
+    "id": 4,
+    "nome": "Slice Cake Red Velvet",
+    "descricao": "Fatia de massa aveludada com recheio leve de cream cheese frosting.",
+    "preco": 15.00,
+    "imagem": "public/produtos/sliceCRed.jpg"
+  },
+  {
+    "id": 5,
+    "nome": "Cone Recheado de Oreo",
+    "descricao": "Casquinha crocante banhada em chocolate branco e recheio trufado.",
+    "preco": 9.00,
+    "imagem": "public/produtos/coneOreo.jpg"
+  },
+  {
+    "id": 6,
+    "nome": "Macaron de Framboesa",
+    "descricao": "Clássico doce francês com casca crocante e recheio artesanal.",
+    "preco": 7.00,
+    "imagem": "public/produtos/macaronFram.jpg"
+  },
+  {
+    "id": 7,
+    "nome": "Brownie com Doce de Leite",
+    "descricao": "Brownie super denso e molhadinho, recheado com doce de leite caseiro.",
+    "preco": 10.00,
+    "imagem": "public/produtos/browniedl.jpg"
+  },
+  {
+    "id": 8,
+    "nome": "Cupcake de Baunilha e Frutas Vermelhas",
+    "descricao": "Massa fofinha com recheio de geleia artesanal e cobertura de buttercream.",
+    "preco": 11.50,
+    "imagem": "public/produtos/CupCKdeFV.jpg"
+  }
+]

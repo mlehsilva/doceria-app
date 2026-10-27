@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Suas customizações de cores pastéis para o Tailwind v4 */
+@theme {
+  --color-doceria-rosa-50: #FFF0F5;
+  --color-doceria-rosa-100: #FFE4E1;
+  --color-doceria-rosa-200: #FFC0CB;
+  --color-doceria-rosa-500: #FF69B4;
+  --color-doceria-rosa-600: #FF1493;
+  --color-doceria-rosa-700: #C71585;
+
+  --color-doceria-amarelo-100: #FFFACD;
+  --color-doceria-amarelo-200: #FEF08A;
+  --color-doceria-amarelo-300: #FDE047;
+  --color-doceria-amarelo-800: #854D0E;
+}
