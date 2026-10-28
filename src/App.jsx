@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { CartProvider, CartContext } from './context/CartContext';
 import Header from './components/Header';
 import ProductList from './components/ProductList';
@@ -6,10 +6,21 @@ import Cart from './components/Cart';
 
 function MainAppContent() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [pulseTrigger, setPulseTrigger] = useState(false);
   const { cartItems } = useContext(CartContext);
   
   // Conta o total de doces na sacola
   const totalItens = cartItems.reduce((acc, item) => acc + item.quantidade, 0);
+
+  // Efeito para disparar a animação física no botão flutuante quando o total mudar
+  useEffect(() => {
+    if (totalItens === 0) return;
+    
+    setPulseTrigger(true);
+    const timer = setTimeout(() => setPulseTrigger(false), 300);
+    
+    return () => clearTimeout(timer);
+  }, [totalItens]);
 
   return (
     <div className="min-h-screen bg-doceria-rosa-50 pb-24 font-sans selection:bg-doceria-rosa-200">
@@ -20,10 +31,12 @@ function MainAppContent() {
         <ProductList />
       </main>
 
-      {/* 🌟 BOTÃO FLUTUANTE DA SACOLA (Aparece fixo no canto inferior direito) */}
+      {/* 🌟 BOTÃO FLUTUANTE DA SACOLA COM ANIMAÇÃO DINÂMICA */}
       <button
         onClick={() => setIsCartOpen(true)}
-        className="fixed bottom-6 right-6 z-40 flex items-center gap-3 bg-green-500 text-white font-bold px-5 py-4 rounded-full shadow-2xl hover:bg-green-600 transition-all transform active:scale-95 cursor-pointer border border-green-400"
+        className={`fixed bottom-6 right-6 z-40 flex items-center gap-3 bg-green-500 text-white font-bold px-5 py-4 rounded-full shadow-2xl hover:bg-green-600 border border-green-400 cursor-pointer transition-all duration-300 transform active:scale-95 ${
+          pulseTrigger ? 'scale-110 brightness-110 ring-4 ring-green-300' : 'scale-100'
+        }`}
       >
         <div className="relative">
           <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">

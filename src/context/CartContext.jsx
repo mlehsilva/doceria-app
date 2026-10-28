@@ -3,11 +3,19 @@ import React, { createContext, useState, useEffect } from 'react';
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  // 🌟 MODIFICAÇÃO: O estado inicial tenta ler os dados salvos no navegador, se não houver nada, começa vazio
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem('@AcuparAfeto:cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  
   const [totalValue, setTotalValue] = useState(0);
 
-  // Calcula o valor total sempre que o carrinho mudar
+  // 🌟 NOVO EFEITO: Salva automaticamente os itens no LocalStorage sempre que o carrinho mudar
   useEffect(() => {
+    localStorage.setItem('@AcuparAfeto:cart', JSON.stringify(cartItems));
+    
+    // Calcula o valor total
     const total = cartItems.reduce((acc, item) => acc + item.preco * item.quantidade, 0);
     setTotalValue(total);
   }, [cartItems]);
@@ -21,7 +29,7 @@ export const CartProvider = ({ children }) => {
           item.id === product.id ? { ...item, quantidade: item.quantidade + 1 } : item
         );
       }
-      return [...prevItems, { ...product, quantidade: 1 }];
+      return [...prevItems, { ...product, quantidade: 1, observacao: '' }];
     });
   };
 
@@ -36,7 +44,16 @@ export const CartProvider = ({ children }) => {
           }
           return item;
         })
-        .filter(Boolean) // Remove o item se a quantidade chegar a 0
+        .filter(Boolean)
+    );
+  };
+
+  // Atualiza o texto de observação de um produto específico
+  const updateObservacao = (id, texto) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, observacao: texto } : item
+      )
     );
   };
 
@@ -45,11 +62,11 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
-  // Limpa o carrinho
+  // Limpa o carrinho (útil após finalizar o pedido)
   const clearCart = () => setCartItems([]);
 
   return (
-    <CartContext.Provider value={{ cartItems, totalValue, addToCart, updateQuantity, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{ cartItems, totalValue, addToCart, updateQuantity, updateObservacao, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );
